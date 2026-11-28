@@ -8,7 +8,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: AspNetCore/publish
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{secrets.wapwithindauth20210104225854_4ace}}
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 10.0.x
+  DOTNET_CORE_VERSION: 11.0.x
   WORKING_DIRECTORY: AspNetCore
 jobs:
   build:
@@ -16,9 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+        include-prerelease: true
     - name: Install dependencies
       run: dotnet restore ${{ env.WORKING_DIRECTORY }}
     - name: Build
